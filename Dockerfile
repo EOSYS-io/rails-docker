@@ -6,8 +6,9 @@ RUN apt-get update -qq && apt-get install -y apt-utils dialog
 RUN apt-get install -y build-essential libpq-dev libcurl3 curl supervisor nginx
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
-RUN apt-get install -y nodejs
-RUN npm install yarn -g
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update -qq && apt-get install -y nodejs yarn
 
 RUN apt-get remove --purge --auto-remove -y curl && rm -rf /var/lib/apt/lists/*
 
