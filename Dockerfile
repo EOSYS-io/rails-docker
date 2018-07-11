@@ -3,7 +3,7 @@ FROM ruby:2.5.1-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -qq && apt-get install -y apt-utils dialog
-RUN apt-get install -y build-essential libpq-dev curl supervisor nginx
+RUN apt-get install -y build-essential libpq-dev libcurl3 curl supervisor nginx
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs
