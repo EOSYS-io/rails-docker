@@ -15,4 +15,11 @@ RUN apt-get remove --purge --auto-remove -y curl && rm -rf /var/lib/apt/lists/*
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
+# Install redis.
+RUN wget http://download.redis.io/redis-stable.tar.gz
+    && tar xvzf redis-stable.tar.gz
+    && cd redis-stable
+    && make
+    && make install
+
 RUN gem update bundler
