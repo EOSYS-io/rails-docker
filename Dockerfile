@@ -3,7 +3,7 @@ FROM ruby:2.5.1-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -qq && apt-get install -y apt-utils dialog
-RUN apt-get install -y build-essential libpq-dev libcurl3 curl supervisor nginx
+RUN apt-get install -y build-essential libpq-dev libcurl3 curl supervisor nginx wget
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -16,10 +16,10 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 # Install redis.
-RUN wget http://download.redis.io/redis-stable.tar.gz
-    && tar xvzf redis-stable.tar.gz
-    && cd redis-stable
-    && make
+RUN wget http://download.redis.io/redis-stable.tar.gz \
+    && tar xvzf redis-stable.tar.gz \
+    && cd redis-stable \
+    && make \
     && make install
 
 RUN gem update bundler
